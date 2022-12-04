@@ -1,0 +1,124 @@
+/* global */
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+
+.sky {
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  overflow: hidden;
+  position: fixed;
+}
+
+.stars {
+  z-index: 10;
+  animation: animStar 1s linear infinite;
+}
+
+.stars::after {
+  content: " ";
+  top: 100vh;
+}
+.stars,
+.stars::after {
+  border-radius: 50%;
+  position: absolute;
+  background: transparent;
+}
+
+.far-stars,
+.far-stars::after {
+  width: 2px;
+  height: 2px;
+}
+.mid-stars,
+.mid-stars::after {
+  width: 3px;
+  height: 3px;
+}
+.near-stars,
+.near-stars::after {
+  width: 4px;
+  height: 4px;
+}
+
+.stars.far-stars {
+  animation-duration: 37s;
+}
+.stars.mid-stars {
+  animation-duration: 27s;
+}
+.stars.near-stars {
+  animation-duration: 17s;
+}
+
+@keyframes animStar {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100vh);
+  }
+}
+
+h2,
+.white {
+  color: #fff;
+}
+
+a {
+  color: #7a7c80;
+  text-decoration: none;
+}
+/* section 1 */
+.section-1 {
+  padding-top: 150px;
+  text-align: center;
+}
+
+.section-1 p {
+  font-size: 1.1rem;
+  padding-bottom: 10px;
+  margin: 0;
+  color: #7a7c80;
+}
+
+.section-1 h2 {
+  font-size: 1.7rem;
+  margin-bottom: 10px;
+}
+
+.section-1 a {
+  font-size: 1.5rem;
+  padding: 10px;
+}
+
+/* animations / utilities */
+
+.section-1 a:hover {
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.white:hover {
+  position: relative;
+  padding-left: 10px;
+}
+
+.social {
+  padding-top: 40px;
+}
+/* media queres */
+@media (max-width: 780px) {
+  .section-1 {
+    padding: 0;
+    padding-top: 5rem;
+  }
+}
