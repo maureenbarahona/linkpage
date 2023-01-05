@@ -1,14 +1,4 @@
 /* global */
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Roboto Regular'), local('Roboto-Regular'),
-    url(./public/assets/font/Roboto.woff2)
-      format('woff2');
-  font-display: swap;
-}
-
 body {
   margin: 0;
   padding: 0;
