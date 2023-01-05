@@ -67,9 +67,13 @@ body {
 
 h1,
 .white {
-  color: #fff;
+  color: rgb(249, 244, 244);
 }
 
+h2 {
+  color: #7a7c80;
+  text-decoration: none;
+}
 a {
   color: #7a7c80;
   text-decoration: none;
