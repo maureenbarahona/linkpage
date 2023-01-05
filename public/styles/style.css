@@ -65,7 +65,7 @@ body {
   }
 }
 
-h2,
+h1,
 .white {
   color: #fff;
 }
@@ -80,14 +80,14 @@ a {
   text-align: center;
 }
 
-.section-1 p {
+.section-1 h2 {
   font-size: 1.1rem;
   padding-bottom: 10px;
   margin: 0;
   color: #7a7c80;
 }
 
-.section-1 h2 {
+.section-1 h3 {
   font-size: 1.7rem;
   margin-bottom: 10px;
 }
