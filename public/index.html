@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="end">
+<html lang="es">
   <head>
     <title>Maureen Barahona</title>
     <link rel="shortcut icon" href="./img/favicon.ico" />
@@ -10,7 +10,6 @@
     />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" />
     <meta
       property="og:title"
       content="Maureen Barahona: consejos prácticos de SRE DevOps"
@@ -19,26 +18,11 @@
       name="description"
       content="Maureen Barahona Passionate about new trends in technology, OpenSource, enthusiastic, Follower of Methodologies that give value, agility and security to solutions, responsible, committed, self-taught and with the ability to work in groups."
     />
+    <meta
+      name="keywords"
+      content="SRE, GDE, cloud, nacho de la tecnologia, Webdev, Maureen Barahona"
+    />
     <style id="style"></style>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=AW-11039889985"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "AW-11039889985");
-    </script>
-    <!-- Event snippet for Website traffic conversion page -->
-    <script>
-      gtag("event", "conversion", {
-        send_to: "AW-11039889985/CoCkCPbIlIcYEMG0nZAp",
-      });
-    </script>
 
     <script
       defer
@@ -47,76 +31,477 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="./styles/style.css" />
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J63HWTPWE0"></script>
+    <link rel="stylesheet" href="./styles/css/main.css" />
+    <!-- Google Tag Manager -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-J63HWTPWE0');
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-TT5Z26D");
     </script>
+    <!-- End Google Tag Manager -->
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=News+Cycle:400,700"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyBYfjBzFfbDiI4e2_GaYGjSePA0sjOIHJk",
+        authDomain: "maureenbarahona-cb833.firebaseapp.com",
+        projectId: "maureenbarahona-cb833",
+        storageBucket: "maureenbarahona-cb833.appspot.com",
+        messagingSenderId: "365667143240",
+        appId: "1:365667143240:web:ef3f1226f743499481127d",
+        measurementId: "G-25G1MLK0XS"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
     <div class="sky">
+      <div class="device-notification">
+        <a class="device-notification--logo" href="#0">
+          <img src="./img/logo.png" alt="Maureen Barahona" />
+          <p>Maureen</p>
+        </a>
+      </div>
+      <div class="perspective effect-rotate-left">
+        <div class="container">
+          <div class="outer-nav--return"></div>
+          <div id="viewport" class="l-viewport">
+            <div class="l-wrapper">
+              <header class="header">
+                <a class="header--logo" href="#0">
+                  <img src="./img/logo.png" alt="Maureen" />
+                  <p>Mau</p>
+                </a>
+                <button class="header--cta cta">consultation</button>
+                <div class="header--nav-toggle">
+                  <span></span>
+                </div>
+              </header>
+              <nav class="l-side-nav">
+                <ul class="side-nav">
+                  <li class="is-active"><span>Home</span></li>
+                  <li><span>Works</span></li>
+                  <li><span>About</span></li>
+                  <li><span>Contact</span></li>
+                  <li><span>consultation</span></li>
+                </ul>
+              </nav>
+              <ul class="l-main-content main-content">
+                <li class="l-section section section--is-active">
+                  <div class="intro">
+                    <div class="intro--banner">
+                      <h1>Maureen<br />Barahona</h1>
+                      <button class="cta">
+                        consultation
+
+                        <span class="btn-background"></span>
+                      </button>
+                      <img
+                        src="./img/introduction-visual.png"
+                        alt="Welcome"
+                      />
+                    </div>
+                    <div class="intro--options">
+                      <a href="#0">
+                        <h3>Resume</h3>
+                        <p>
+                          More than 20 years of experience in different aspects
+                          of the software industry. Adaptable, resourceful and
+                          results-oriented professional. Strengths include
+                          problem solving, data analysis, and process
+                          improvement.
+                        </p>
+                      </a>
+                      <a href="#0">
+                        <h3>Technologic education</h3>
+                        <p>
+                          Founder of "Nacho de la Tecnología" is a compendium of
+                          "complied" knowledge suitable for even a child to
+                          understand
+                        </p>
+                      </a>
+                      <a href="#0">
+                        <h3>Communities</h3>
+                        <p>
+                          GDE en Cloud, Champion Innovator Co-Organizer in
+                          @DevTeam504, Organizer in @CloudNativeHonduras
+                          @WTMTegucigalpa Embajadora de Economy PHI y
+                          WomenTechMaker
+                        </p>
+                      </a>
+                    </div>
+                    <div class="social">
+                      <a
+                        href="https://www.facebook.com/mfbarahona"
+                        aria-label="Maureen Barahona Facebook"
+                        ><i class="fab fa-facebook"></i
+                      ></a>
+                      <a
+                        href="https://twitter.com/evilmona"
+                        aria-label="Maureen Barahona twitter"
+                        ><i class="fab fa-twitter"></i
+                      ></a>
+                      <a
+                        href="https://www.linkedin.com/in/maureen-barahona/"
+                        aria-label="Maureen Barahona linkedin"
+                        ><i class="fab fa-linkedin"></i
+                      ></a>
+                      <a
+                        href="https://github.com/maureenbarahona"
+                        aria-label=" Maureen Barahona github"
+                        ><i class="fab fa-github"></i
+                      ></a>
+                      <a
+                        href="https://www.instagram.com/maureenbarahona/"
+                        aria-label="Maureen Barahona instagram"
+                        ><i class="fab fa-instagram"></i
+                      ></a>
+                      <a
+                        href="https://www.youtube.com/channel/UCt23oKZgRHDn7gmWVbs-IsQ"
+                        aria-label="Maureen Barahona youtube"
+                        ><i class="fab fa-youtube"></i
+                      ></a>
+                      <a
+                        href="https://www.tiktok.com/@maureen.barahona"
+                        aria-label="Maureen Barahona tiktok"
+                        ><i class="fab fa-tiktok"></i
+                      ></a>
+                      <a
+                        href="https://medium.com/@maureenbarahona"
+                        aria-label="Maureen Barahona medium"
+                        ><i class="fab fa-medium"></i
+                      ></a>
+                    </div>
+                  </div>
+                </li>
+                <li class="l-section section">
+                  <div class="work">
+                    <h2>Selected work</h2>
+                    <div class="work--lockup">
+                      <ul class="slider">
+                        <li class="slider--item slider--item-left">
+                          <a
+                            href="https://g.dev/maureenbarahona"
+                          >
+                            <div class="slider--item-image">
+                              <img
+                                src="./img/work-victory.jpg"
+                                alt="WTM"
+                              />
+                            </div>
+                            <p class="slider--item-title">GDE & WTM Ambassador</p>
+                            <p class="slider--item-description">
+                              Check my badges and developer profile.
+                            </p>
+                          </a>
+                        </li>
+                        <li class="slider--item slider--item-center">
+                          <a
+                            href="https://www.canva.com/design/DAFdGb0Hhpc/J0Epz41eCt9GD30A0Hqq0w/view?website#2:maureen-barahona"
+                          >
+                            <div class="slider--item-image">
+                              <img
+                                src="./img/work-metiew-smith.jpg"
+                                alt="Resume"
+                              />
+                            </div>
+                            <p class="slider--item-title">Resume</p>
+                            <p class="slider--item-description">
+                              Check my experience 
+                            </p>
+                          </a>
+                        </li>
+                        <li class="slider--item slider--item-right">
+                          <a href="#0">
+                            <div class="slider--item-image">
+                              <img
+                                src="./img/work-alex-nowak.jpg"
+                                alt="Nacho de la Tecnologia"
+                              />
+                            </div>
+                            <p class="slider--item-title">
+                              Nacho de la Tecnologia
+                            </p>
+                            <p class="slider--item-description">
+                              Follow my social networks to see all the publications about "El Nacho de la Tecnología" 
+                            </p>
+                          </a>
+                        </li>
+                      </ul>
+                      <div class="slider--prev">
+                        <svg
+                          version="1.1"
+                          id="Layer_1"
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          x="0px"
+                          y="0px"
+                          viewBox="0 0 150 118"
+                          style="enable-background: new 0 0 150 118"
+                          xml:space="preserve"
+                        >
+                          <g
+                            transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)"
+                          >
+                            <path
+                              d="M561,1169C525,1155,10,640,3,612c-3-13,1-36,8-52c8-15,134-145,281-289C527,41,562,10,590,10c22,0,41,9,61,29
+                          c55,55,49,64-163,278L296,510h575c564,0,576,0,597,20c46,43,37,109-18,137c-19,10-159,13-590,13l-565,1l182,180
+                          c101,99,187,188,193,199c16,30,12,57-12,84C631,1174,595,1183,561,1169z"
+                            />
+                          </g>
+                        </svg>
+                      </div>
+                      <div class="slider--next">
+                        <svg
+                          version="1.1"
+                          id="Layer_1"
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          x="0px"
+                          y="0px"
+                          viewBox="0 0 150 118"
+                          style="enable-background: new 0 0 150 118"
+                          xml:space="preserve"
+                        >
+                          <g
+                            transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)"
+                          >
+                            <path
+                              d="M870,1167c-34-17-55-57-46-90c3-15,81-100,194-211l187-185l-565-1c-431,0-571-3-590-13c-55-28-64-94-18-137c21-20,33-20,597-20h575l-192-193C800,103,794,94,849,39c20-20,39-29,61-29c28,0,63,30,298,262c147,144,272,271,279,282c30,51,23,60-219,304C947,1180,926,1196,870,1167z"
+                            />
+                          </g>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="l-section section">
+                  <div class="about">
+                    <div class="about--banner">
+                      <h2>Make the<br />world<br />a better<br />place</h2>
+
+                      <img src="./img/about-visual.png" alt="About Us" />
+                      <div class="social">
+                        <a
+                          href="https://www.facebook.com/mfbarahona"
+                          aria-label="Maureen Barahona Facebook"
+                          ><i class="fab fa-facebook"></i
+                        ></a>
+                        <a
+                          href="https://twitter.com/evilmona"
+                          aria-label="Maureen Barahona twitter"
+                          ><i class="fab fa-twitter"></i
+                        ></a>
+                        <a
+                          href="https://www.linkedin.com/in/maureen-barahona/"
+                          aria-label="Maureen Barahona linkedin"
+                          ><i class="fab fa-linkedin"></i
+                        ></a>
+                        <a
+                          href="https://github.com/maureenbarahona"
+                          aria-label=" Maureen Barahona github"
+                          ><i class="fab fa-github"></i
+                        ></a>
+                        <a
+                          href="https://www.instagram.com/maureenbarahona/"
+                          aria-label="Maureen Barahona instagram"
+                          ><i class="fab fa-instagram"></i
+                        ></a>
+                        <a
+                          href="https://www.youtube.com/channel/UCt23oKZgRHDn7gmWVbs-IsQ"
+                          aria-label="Maureen Barahona youtube"
+                          ><i class="fab fa-youtube"></i
+                        ></a>
+                        <a
+                          href="https://www.tiktok.com/@maureen.barahona"
+                          aria-label="Maureen Barahona tiktok"
+                          ><i class="fab fa-tiktok"></i
+                        ></a>
+                        <a
+                          href="https://medium.com/@maureenbarahona"
+                          aria-label="Maureen Barahona medium"
+                          ><i class="fab fa-medium"></i
+                        ></a>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </li>
+                <li class="l-section section">
+                  <div class="contact">
+                    <div class="contact--lockup">
+                      
+                      <div class="modal">
+                        <div class="modal--information">
+                          <p>Honduras</p>
+                          <a href="mailto:me@maureenbarahona.dev"
+                            >me@maureenbarahona.dev</a
+                          >
+                        </div>
+                        <ul class="modal--options">
+                          <li>
+                            <a href="https://t.me/MaureenBarahona">telegram</a>
+                          </li>
+
+                          <li>
+                            <a href="mailto:me@maureenbarahona.dev">Email</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="l-section section">
+                  <div class="hire">
+                    <h2>Do you need my help</h2>
+                    <!-- checkout formspree.io for easy form setup -->
+                    <form
+                      class="work-request"
+                      action="https://api.web3forms.com/submit"
+                      method="POST"
+                      id="form"
+                    >
+                      <input
+                        type="hidden"
+                        name="access_key"
+                        value="57fc0dfd-4033-4766-b752-9c206ebac02d"
+                      />
+                      <input
+                        type="hidden"
+                        name="subject"
+                        value="Consultation for "
+                      />
+                      <input
+                        type="hidden"
+                        name="redirect"
+                        value="https://web3forms.com/success"
+                      />
+                      <input
+                        type="checkbox"
+                        name="botcheck"
+                        id=""
+                        style="display: none"
+                      />
+                      <div class="work-request--options">
+                        <span class="options-a">
+                          <input id="opt-1" type="checkbox" value="Workshops" name ="Workshops" />
+                          <label for="opt-1"> Workshops </label>
+                          <input
+                            id="opt-2"
+                            type="checkbox"
+                            value="web design"
+                            name ="web design"
+                          />
+                          <label for="opt-2"> Web Design </label>
+                          <input id="opt-3" type="checkbox" value="DevOps" name ="DevOps"/>
+                          <label for="opt-3"> DevOps </label>
+                        </span>
+                        <span class="options-b">
+                          <input
+                            id="opt-4"
+                            type="checkbox"
+                            value="technical support"
+                            name ="technical support"
+                          />
+                          <label for="opt-4"> technical support </label>
+                          <input
+                            id="opt-5"
+                            type="checkbox"
+                            value="Modern architecture"
+                            name ="Modern architecture"
+                          />
+                          <label for="opt-5"> Modern architecture </label>
+                          <input id="opt-6" type="checkbox" value="marketing" name ="marketing"/>
+                          <label for="opt-6">
+                            <svg
+                              version="1.1"
+                              id="Layer_1"
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              x="0px"
+                              y="0px"
+                              viewBox="0 0 150 111"
+                              style="enable-background: new 0 0 150 111"
+                              xml:space="preserve"
+                            >
+                              <g
+                                transform="translate(0.000000,111.000000) scale(0.100000,-0.100000)"
+                              >
+                                <path
+                                  d="M950,705L555,310L360,505C253,612,160,700,155,700c-6,0-44-34-85-75l-75-75l278-278L550-5l475,475c261,261,475,480,475,485c0,13-132,145-145,145C1349,1100,1167,922,950,705z"
+                                />
+                              </g>
+                            </svg>
+                            Marketing
+                          </label>
+                        </span>
+                      </div>
+                      <div class="work-request--information">
+                        <div class="information-name">
+                          <input id="name" type="text" spellcheck="false" name ="name" />
+                          <label for="name">Name</label>
+                        </div>
+                        <div class="information-email">
+                          <input id="email" type="email" spellcheck="false" name ="email" />
+                          <label for="email">Email</label>
+                        </div>
+                      </div>
+                      <input type="submit" value="Send Request" />
+                       <p class="text-base text-center text-gray-400" id="result"></p>
+                    </form>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <ul class="outer-nav">
+          <li class="is-active">Home</li>
+          <li>Works</li>
+          <li>About</li>
+          <li>Contact</li>
+          <li>consultation</li>
+        </ul>
+      </div>
+
       <div class="stars far-stars"></div>
       <div class="stars mid-stars"></div>
       <div class="stars near-stars"></div>
-      <div class="container">
-        <div class="section-1">
-          <i class="fas fa-code fa-5x white"></i>
-          <h1>Maureen Barahona</h1>
-          <h2>Google Developer Expert in GCP</h2>
-          <h2>DevOps/SRE Engineer</h2>
-          <h2>Full-Stack Web Developer</h2>
-          <h2>Ambassador at phi-economy</h2>
-          <h2>Woman Techmakers Ambassador</h2>
-          <div class="social">
-            <a
-              href="https://www.facebook.com/mfbarahona"
-              aria-label="Maureen Barahona Facebook"
-              ><i class="fab fa-facebook"></i
-            ></a>
-            <a
-              href="https://twitter.com/evilmona"
-              aria-label="Maureen Barahona twitter"
-              ><i class="fab fa-twitter"></i
-            ></a>
-            <a
-              href="https://www.linkedin.com/in/maureen-barahona/"
-              aria-label="Maureen Barahona linkedin"
-              ><i class="fab fa-linkedin"></i
-            ></a>
-            <a
-              href="https://github.com/maureenbarahona"
-              aria-label=" Maureen Barahona github"
-              ><i class="fab fa-github"></i
-            ></a>
-            <a
-              href="https://www.instagram.com/maureenbarahona/"
-              aria-label="Maureen Barahona instagram"
-              ><i class="fab fa-instagram"></i
-            ></a>
-            <a
-              href="https://www.youtube.com/channel/UCt23oKZgRHDn7gmWVbs-IsQ"
-              aria-label="Maureen Barahona youtube"
-              ><i class="fab fa-youtube"></i
-            ></a>
-            <a
-              href="https://www.tiktok.com/@maureen.barahona"
-              aria-label="Maureen Barahona tiktok"
-              ><i class="fab fa-tiktok"></i
-            ></a>
-            <a
-              href="https://medium.com/@maureenbarahona"
-              aria-label="Maureen Barahona medium"
-              ><i class="fab fa-medium"></i
-            ></a>
-          </div>
-        </div>
-      </div>
     </div>
 
     <script src="./js/app.js"></script>
+    <script src="./js/forms.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script>
+      window.jQuery ||
+        document.write(
+          '<script src="assets/js/vendor/jquery-2.2.4.min.js"><\/script>'
+        );
+    </script>
+    <script src="./js/functions-min.js"></script>
   </body>
 </html>
