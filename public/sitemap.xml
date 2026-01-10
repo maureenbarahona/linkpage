@@ -5,7 +5,7 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <url>
-  <loc>https://maureenbarahona.dev/</loc>
+  <loc>https://maureenbarahona.foo/</loc>
   <changefreq>weekly</changefreq>
   <priority>1.0</priority>
   <lastmod>2025-01-09</lastmod>
