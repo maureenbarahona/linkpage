@@ -4,7 +4,14 @@
 <head>
   <title>Maureen Barahona - SRE DevOps Engineer | MauDev</title>
   <link rel="shortcut icon" href="./img/favicon.ico" />
-  <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://maxcdn.bootstrapcdn.com">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  </noscript>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta property="og:title" content="Maureen Barahona - SRE DevOps Engineer & GDE" />
@@ -46,13 +53,151 @@
       }
     }
     </script>
-  <style id="style"></style>
+  <style id="style">
+    /* global */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Roboto", sans-serif;
+    }
+
+
+    .sky {
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+      overflow: hidden;
+      position: fixed;
+    }
+
+    .stars {
+      z-index: 10;
+      animation: animStar 1s linear infinite;
+    }
+
+    .stars::after {
+      content: " ";
+      top: 100vh;
+    }
+
+    .stars,
+    .stars::after {
+      border-radius: 50%;
+      position: absolute;
+      background: transparent;
+    }
+
+    .far-stars,
+    .far-stars::after {
+      width: 2px;
+      height: 2px;
+    }
+
+    .mid-stars,
+    .mid-stars::after {
+      width: 3px;
+      height: 3px;
+    }
+
+    .near-stars,
+    .near-stars::after {
+      width: 4px;
+      height: 4px;
+    }
+
+    .stars.far-stars {
+      animation-duration: 37s;
+    }
+
+    .stars.mid-stars {
+      animation-duration: 27s;
+    }
+
+    .stars.near-stars {
+      animation-duration: 17s;
+    }
+
+    @keyframes animStar {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(-100vh);
+      }
+    }
+
+    h1,
+    .white {
+      color: rgb(249, 244, 244);
+    }
+
+    h2 {
+      color: #7a7c80;
+      text-decoration: none;
+    }
+
+    a {
+      color: #7a7c80;
+      text-decoration: none;
+    }
+
+    /* section 1 */
+    .section-1 {
+      padding-top: 150px;
+      text-align: center;
+    }
+
+    .section-1 h2 {
+      font-size: 1.1rem;
+      padding-bottom: 10px;
+      margin: 0;
+      color: #7a7c80;
+    }
+
+    .section-1 h3 {
+      font-size: 1.7rem;
+      margin-bottom: 10px;
+    }
+
+    .section-1 a {
+      font-size: 1.5rem;
+      padding: 10px;
+    }
+
+    /* animations / utilities */
+
+    .section-1 a:hover {
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .white:hover {
+      position: relative;
+      padding-left: 10px;
+    }
+
+    .social {
+      padding-top: 40px;
+    }
+
+    /* media queres */
+    @media (max-width: 780px) {
+      .section-1 {
+        padding: 0;
+        padding-top: 5rem;
+      }
+    }
+  </style>
 
   <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
     integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
     crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="./styles/style.css" />
-  <link rel="stylesheet" href="./styles/css/main.css" />
+  <link rel="preload" href="./styles/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link rel="stylesheet" href="./styles/css/main.css" />
+  </noscript>
   <!-- Google Tag Manager -->
   <script>
     (function (w, d, s, l, i) {
@@ -67,8 +212,16 @@
     })(window, document, "script", "dataLayer", "GTM-TT5Z26D");
   </script>
   <!-- End Google Tag Manager -->
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css?family=News+Cycle:400,700" rel="stylesheet" />
+  <link rel="preload" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" as="style"
+    onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+  </noscript>
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=News+Cycle:400,700" as="style"
+    onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css?family=News+Cycle:400,700" rel="stylesheet" />
+  </noscript>
 </head>
 
 <body>
