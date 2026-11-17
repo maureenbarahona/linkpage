@@ -8,7 +8,19 @@
   <loc>https://maureenbarahona.foo/</loc>
   <changefreq>weekly</changefreq>
   <priority>1.0</priority>
-  <lastmod>2025-01-09</lastmod>
+  <lastmod>2026-11-16</lastmod>
+</url>
+<url>
+  <loc>https://maureenbarahona.foo/codelabs</loc>
+  <changefreq>weekly</changefreq>
+  <priority>0.9</priority>
+  <lastmod>2026-11-16</lastmod>
+</url>
+<url>
+  <loc>https://maureenbarahona.foo/codelabs/orquestando-la-salud-con-antigravity</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.9</priority>
+  <lastmod>2026-11-16</lastmod>
 </url>
 
 

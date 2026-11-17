@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      if (window.location.protocol !== "file:") {
+        var match = window.location.pathname.match(/^(.*?\/codelabs)(?:\/|$)/i);
+        if (match) {
+          var base = document.createElement("base");
+          base.href = match[1] + "/";
+          document.head.appendChild(base);
+        }
+      }
+    })();
+  </script>
+  <title>Codelabs Paso a Paso | Maureen Barahona · MauDev</title>
+  <link rel="shortcut icon" href="../img/favicon.ico" />
+  <meta
+    name="description"
+    content="Talleres técnicos interactivos paso a paso sobre Cloud, IA, Desarrollo Agéntico y HealthTech por Maureen Barahona (GDE Cloud & WTM Ambassador)."
+  />
+  <meta property="og:title" content="Codelabs Interactivos | Maureen Barahona · MauDev" />
+  <meta
+    property="og:description"
+    content="Aprende Cloud, IA, Antigravity IDE y Google Cloud Run paso a paso con talleres guiados por Maureen Barahona."
+  />
+  <meta property="og:image" content="https://maureenbarahona.foo/img/logo.png" />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+  />
+  <link rel="stylesheet" href="./styles/codelabs.css" />
+</head>
+
+<body>
+  <div id="codelabs-app">
+    <noscript>
+      <div style="padding: 2rem; text-align: center; font-family: sans-serif;">
+        <h1>Codelabs Interactivos · Maureen Barahona</h1>
+        <p>Por favor habilita JavaScript en tu navegador para ejecutar el visor interactivo de Codelabs paso a paso.</p>
+        <p><a href="../index.html">← Volver a maureenbarahona.foo</a></p>
+      </div>
+    </noscript>
+  </div>
+
+  <!-- Offline / file:// embedded fallback + modular Codelabs engine -->
+  <script defer src="../content/codelabs/embeddedCatalog.js"></script>
+  <script defer src="./js/utils/urlPaths.js"></script>
+  <script defer src="./js/utils/codelabParser.js"></script>
+  <script defer src="./js/hooks/useCodelabProgress.js"></script>
+  <script defer src="./js/utils/codelabLoader.js"></script>
+  <script defer src="./js/components/CalloutBox.js"></script>
+  <script defer src="./js/components/CodeBlock.js"></script>
+  <script defer src="./js/components/CodelabSidebar.js"></script>
+  <script defer src="./js/components/CodelabList.js"></script>
+  <script defer src="./js/components/CodelabReader.js"></script>
+  <script defer src="./js/app.js"></script>
+</body>
+
+</html>
