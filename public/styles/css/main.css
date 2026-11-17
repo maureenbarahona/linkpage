@@ -2463,12 +2463,18 @@ body {
 
 .social .social--link > i,
 .social .social--link > svg,
+.about--banner .social .social--link > i,
 .about--banner .social .social--link > svg {
   position: relative;
   left: 0;
   z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: auto;
   height: 1em;
+  font-size: inherit;
+  line-height: 1;
   overflow: visible;
   fill: currentColor;
 }
