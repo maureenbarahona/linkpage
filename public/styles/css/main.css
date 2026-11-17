@@ -2380,7 +2380,154 @@ body {
   .intro--codelab-btn .btn-background,
   .intro--codelab-btn svg,
   .intro--codelab-featured,
-  .intro--codelab-catalog {
+  .intro--codelab-catalog,
+  .social .social--link,
+  .social .social--link::before,
+  .social .social--link::after {
     transition: none;
+  }
+}
+
+/* ==========================================================================
+   Accessible Social Media Dock (WCAG 2.2 AA/AAA · 46x46px Touch Targets)
+   ========================================================================== */
+.social {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding-top: 28px;
+}
+
+.social .social--link,
+.about--banner .social .social--link {
+  --social-accent: #0f33ff;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border-radius: 12px;
+  background-color: #161821;
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  color: #f9f4f4;
+  font-size: 22px;
+  line-height: 1;
+  text-decoration: none;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.48);
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), color 0.2s ease, border-color 0.2s ease;
+}
+
+/* GPU-composited brand accent fill on hover/focus (no backdrop-filter inside 3D .perspective) */
+.social .social--link::before,
+.about--banner .social .social--link::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background-color: var(--social-accent);
+  opacity: 0;
+  z-index: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Accessible floating tooltip pill showing network name on hover & keyboard focus */
+.social .social--link::after,
+.about--banner .social .social--link::after {
+  content: attr(data-network);
+  position: absolute;
+  bottom: calc(100% + 9px);
+  left: 50%;
+  transform: translate(-50%, 5px);
+  padding: 4px 9px;
+  border-radius: 6px;
+  background-color: #141620;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: none;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 10;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.social .social--link > i,
+.social .social--link > svg,
+.about--banner .social .social--link > svg {
+  position: relative;
+  left: 0;
+  z-index: 1;
+  width: auto;
+  height: 1em;
+  overflow: visible;
+  fill: currentColor;
+}
+
+.social .social--link:hover,
+.social .social--link:focus-visible,
+.about--banner .social .social--link:hover,
+.about--banner .social .social--link:focus-visible {
+  color: #ffffff;
+  border-color: transparent;
+  transform: translateY(-4px) scale(1.06);
+}
+
+.about--banner .social .social--link:hover > svg {
+  left: 0;
+}
+
+.social .social--link:hover::before,
+.social .social--link:focus-visible::before,
+.about--banner .social .social--link:hover::before,
+.about--banner .social .social--link:focus-visible::before {
+  opacity: 1;
+}
+
+.social .social--link:hover::after,
+.social .social--link:focus-visible::after,
+.about--banner .social .social--link:hover::after,
+.about--banner .social .social--link:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.social .social--link:focus-visible,
+.about--banner .social .social--link:focus-visible {
+  outline: 2.5px solid #fbbf24;
+  outline-offset: 3px;
+}
+
+/* Signature Brand Accents per Network */
+.social .social--facebook { --social-accent: #1877f2; }
+.social .social--twitter { --social-accent: #1d9bf0; }
+.social .social--linkedin { --social-accent: #0a66c2; }
+.social .social--github { --social-accent: #6e40c9; }
+.social .social--instagram { --social-accent: #e1306c; }
+.social .social--youtube { --social-accent: #e62117; }
+.social .social--tiktok { --social-accent: #0f33ff; }
+.social .social--medium { --social-accent: #0f766e; }
+
+@media (max-width: 767px) {
+  .social {
+    padding-top: 22px;
+    gap: 10px;
+  }
+
+  .social .social--link,
+  .about--banner .social .social--link {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+    border-radius: 11px;
   }
 }

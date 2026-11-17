@@ -170,11 +170,16 @@
     footer.innerHTML = `
       <div class="cl-catalog-footer__inner">
         <p>© ${new Date().getFullYear()} <a href="${homeHref}">Maureen Barahona (MauDev)</a> · SRE / DevOps &amp; Google Developer Expert in Cloud.</p>
-        <div class="cl-catalog-footer__links">
-          <a href="https://github.com/maureenbarahona" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <nav class="cl-catalog-footer__links" aria-label="Redes sociales de Maureen Barahona">
           <a href="https://www.linkedin.com/in/maureen-barahona/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://github.com/maureenbarahona" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.youtube.com/channel/UCt23oKZgRHDn7gmWVbs-IsQ" target="_blank" rel="noopener noreferrer">YouTube</a>
+          <a href="https://www.instagram.com/maureenbarahona/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="https://twitter.com/evilmona" target="_blank" rel="noopener noreferrer">X / Twitter</a>
+          <a href="https://www.tiktok.com/@maureen.barahona" target="_blank" rel="noopener noreferrer">TikTok</a>
           <a href="https://medium.com/@maureenbarahona" target="_blank" rel="noopener noreferrer">Medium</a>
-        </div>
+          <a href="https://www.facebook.com/mfbarahona" target="_blank" rel="noopener noreferrer">Facebook</a>
+        </nav>
       </div>
     `;
 
@@ -210,6 +215,74 @@
         });
         tagsRow.appendChild(chip);
       });
+    }
+
+    function createGoogleCodelabsCard() {
+      const googleUrl = 'https://codelabs.developers.google.com/';
+      const promoCard = document.createElement('article');
+      promoCard.className = 'cl-card cl-card--featured cl-card--google';
+
+      promoCard.innerHTML = `
+        <div class="cl-card__shimmer-bar" aria-hidden="true">
+          <span class="cl-card__shimmer-runner"></span>
+        </div>
+        <div class="cl-card__top">
+          <div class="cl-card__categories">
+            <span class="cl-cat-badge cl-cat-badge--google">
+              <span class="cl-live-dot" aria-hidden="true"></span>
+              Google Developers
+            </span>
+            <span class="cl-cat-badge">Oficial</span>
+          </div>
+          <div class="cl-card__duration">
+            <span>Acceso gratuito · 24/7</span>
+          </div>
+        </div>
+        <h2 class="cl-card__title">
+          <a href="${googleUrl}" target="_blank" rel="noopener noreferrer" class="cl-card__title-link">
+            ¿Quieres aprender más? Visita Google Codelabs
+          </a>
+        </h2>
+        <p class="cl-card__summary">
+          Continúa practicando con cientos de tutoriales técnicos interactivos paso a paso creados por Google sobre Cloud, Gemini, IA Generativa, Firebase, Web, Android y más.
+        </p>
+        <div class="cl-card__tags">
+          <span class="cl-card__tag">#google-cloud</span>
+          <span class="cl-card__tag">#gemini</span>
+          <span class="cl-card__tag">#firebase</span>
+          <span class="cl-card__tag">#web</span>
+          <span class="cl-card__tag">#ai</span>
+        </div>
+        <div class="cl-card__progress cl-card__progress--google">
+          <div class="cl-card__progress-meta">
+            <span class="cl-card__progress-status">✦ Catálogo global de Google Developers</span>
+            <span class="cl-card__progress-pct">+500 labs</span>
+          </div>
+          <div class="cl-card__progress-track" aria-hidden="true">
+            <div class="cl-card__progress-fill cl-card__progress-fill--google"></div>
+          </div>
+        </div>
+        <div class="cl-card__footer">
+          <span class="cl-card__author">codelabs.developers.google.com</span>
+          <a
+            href="${googleUrl}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="cl-slide-cta"
+            aria-label="Visitar Google Developers Codelabs en una pestaña nueva"
+          >
+            <span>Google Codelabs</span>
+            <svg viewBox="0 0 150 118" width="15" height="12" aria-hidden="true">
+              <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
+                <path d="M870,1167c-34-17-55-57-46-90c3-15,81-100,194-211l187-185l-565-1c-431,0-571-3-590-13c-55-28-64-94-18-137c21-20,33-20,597-20h575l-192-193C800,103,794,94,849,39c20-20,39-29,61-29c28,0,63,30,298,262c147,144,272,271,279,282c30,51,23,60-219,304C947,1180,926,1196,870,1167z" />
+              </g>
+            </svg>
+            <span class="cl-slide-cta__bg" aria-hidden="true"></span>
+          </a>
+        </div>
+      `;
+
+      return promoCard;
     }
 
     function renderGrid() {
@@ -264,6 +337,7 @@
           });
         }
         gridEl.appendChild(emptyEl);
+        gridEl.appendChild(createGoogleCodelabsCard());
         return;
       }
 
@@ -366,6 +440,8 @@
 
         gridEl.appendChild(card);
       });
+
+      gridEl.appendChild(createGoogleCodelabsCard());
     }
 
     if (searchInput) {
