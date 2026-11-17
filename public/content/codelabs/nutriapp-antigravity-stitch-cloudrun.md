@@ -6,7 +6,7 @@ status: Published
 authors: Maureen Barahona
 Feedback Link: https://github.com/
 
-# De Diseño a Código con Antigravity, Stitch y Cloud Run: NutriApp
+# Orquestando la salud con Antigravity
 
 *Por Maureen Barahona*
 
