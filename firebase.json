@@ -8,6 +8,14 @@
     ],
     "rewrites": [
       {
+        "source": "/codelabs/**",
+        "destination": "/codelabs/index.html"
+      },
+      {
+        "source": "/codelabs",
+        "destination": "/codelabs/index.html"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }

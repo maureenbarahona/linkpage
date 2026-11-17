@@ -2143,3 +2143,244 @@ body {
     gap: 30px;
   }
 }
+
+/* ==========================================================================
+   Homepage Codelabs Access & Native Hero CTA (3D-Safe, GPU-Composited)
+   ========================================================================== */
+.perspective--modalview .container,
+.outer-nav.is-vis > li,
+.section--is-active,
+.section--next,
+.section--prev {
+  will-change: transform, opacity;
+}
+
+.header--actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header--codelabs-pill {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  background-color: #141620;
+  border: 1px solid rgba(217, 107, 56, 0.5);
+  color: #f9f4f4;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.header--codelabs-pill::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background-color: #0f33ff;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.header--codelabs-pill:hover,
+.header--codelabs-pill:focus-visible {
+  transform: translateY(-1px);
+  color: #ffffff;
+}
+
+.header--codelabs-pill:hover::before,
+.header--codelabs-pill:focus-visible::before {
+  opacity: 0.36;
+}
+
+.header--codelabs-badge {
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #d96b38, #f59e0b);
+  color: #0c0c0c;
+  font-size: 9.5px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+}
+
+.intro--cta-row {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+}
+
+.intro--codelab-btn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 17px 5px 12px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.6;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.intro--codelab-btn:hover,
+.intro--codelab-btn:focus-visible {
+  color: #ffffff;
+}
+
+.intro--codelab-btn .btn-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-color: #d96b38;
+  z-index: -1;
+  transform-origin: 100% 50%;
+  transform: scaleX(0.84);
+  transition: transform 0.2s ease-in-out;
+}
+
+.intro--codelab-btn:hover .btn-background,
+.intro--codelab-btn:focus-visible .btn-background {
+  transform: scaleX(1);
+}
+
+.intro--codelab-btn svg {
+  position: relative;
+  left: 5px;
+  width: 15px;
+  height: 12px;
+  fill: #ffffff;
+  transition: transform 0.2s ease-in-out;
+}
+
+.intro--codelab-btn:hover svg,
+.intro--codelab-btn:focus-visible svg {
+  transform: translateX(3px);
+}
+
+.intro--codelab-trail {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  max-width: 440px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.intro--codelab-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.22);
+  flex-shrink: 0;
+}
+
+.intro--codelab-featured {
+  color: #e5e0da;
+  font-weight: 700;
+  text-decoration: none;
+  opacity: 0.88;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.intro--codelab-featured:hover,
+.intro--codelab-featured:focus-visible {
+  color: #ffffff;
+  opacity: 1;
+  transform: translateX(1px);
+}
+
+.intro--codelab-sep {
+  color: #555555;
+  font-weight: 700;
+}
+
+.intro--codelab-catalog {
+  color: #fbbf24;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  opacity: 0.86;
+  transition: opacity 0.2s ease;
+}
+
+.intro--codelab-catalog:hover,
+.intro--codelab-catalog:focus-visible {
+  color: #fbbf24;
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .header--codelabs-badge {
+    display: none;
+  }
+
+  .intro--codelab-trail {
+    margin-top: 10px;
+    max-width: 360px;
+    font-size: 11.5px;
+  }
+}
+
+@media (max-width: 767px) {
+  .intro--cta-row {
+    gap: 12px;
+  }
+
+  .intro--codelab-btn {
+    font-size: 12.5px;
+    padding: 4px 15px 4px 10px;
+  }
+
+  .intro--codelab-trail {
+    margin-top: 8px;
+    max-width: 340px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header--codelabs-pill {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header--codelabs-pill,
+  .header--codelabs-pill::before,
+  .intro--codelab-btn .btn-background,
+  .intro--codelab-btn svg,
+  .intro--codelab-featured,
+  .intro--codelab-catalog {
+    transition: none;
+  }
+}

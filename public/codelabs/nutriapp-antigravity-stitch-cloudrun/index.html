@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      if (window.location.protocol !== "file:") {
+        var match = window.location.pathname.match(/^(.*?\/codelabs)(?:\/|$)/i);
+        if (match) {
+          var base = document.createElement("base");
+          base.href = match[1] + "/nutriapp-antigravity-stitch-cloudrun/";
+          document.head.appendChild(base);
+        }
+      }
+    })();
+  </script>
+  <title>Orquestando la salud con Antigravity | Codelabs · Maureen Barahona</title>
+  <link rel="shortcut icon" href="../../img/favicon.ico" />
+  <meta
+    name="description"
+    content="Diseña NutriApp con Google Stitch, conecta el servidor MCP de Stitch en Antigravity IDE para generar cálculos antropométricos, macros y micronutrientes, y despliega la solución en Google Cloud Run en menos de 50 minutos."
+  />
+  <meta property="og:title" content="Orquestando la salud con Antigravity | Maureen Barahona" />
+  <meta
+    property="og:description"
+    content="Diseña NutriApp con Google Stitch, conecta el servidor MCP de Stitch en Antigravity IDE y despliega en Google Cloud Run en menos de 50 minutos."
+  />
+  <meta property="og:url" content="https://maureenbarahona.foo/codelabs/nutriapp-antigravity-stitch-cloudrun" />
+  <meta property="og:site_name" content="Maureen Barahona · MauDev" />
+  <meta property="og:image" content="https://maureenbarahona.foo/img/logo.png" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Orquestando la salud con Antigravity · Maureen Barahona" />
+  <meta name="twitter:description" content="Realiza el taller paso a paso de Google Stitch + Antigravity IDE + Cloud Run en maureenbarahona.foo." />
+  <meta name="twitter:image" content="https://maureenbarahona.foo/img/logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+  />
+  <link rel="stylesheet" href="../styles/codelabs.css" />
+</head>
+
+<body>
+  <div id="codelabs-app">
+    <noscript>
+      <div style="padding: 2rem; text-align: center; font-family: sans-serif;">
+        <h1>Orquestando la salud con Antigravity</h1>
+        <p>Por favor habilita JavaScript en tu navegador para abrir el visor paso a paso.</p>
+        <p><a href="../index.html">← Volver a Codelabs</a></p>
+      </div>
+    </noscript>
+  </div>
+
+  <script defer src="../../content/codelabs/embeddedCatalog.js"></script>
+  <script defer src="../js/utils/urlPaths.js"></script>
+  <script defer src="../js/utils/codelabParser.js"></script>
+  <script defer src="../js/hooks/useCodelabProgress.js"></script>
+  <script defer src="../js/utils/codelabLoader.js"></script>
+  <script defer src="../js/components/CalloutBox.js"></script>
+  <script defer src="../js/components/CodeBlock.js"></script>
+  <script defer src="../js/components/CodelabSidebar.js"></script>
+  <script defer src="../js/components/CodelabList.js"></script>
+  <script defer src="../js/components/CodelabReader.js"></script>
+  <script defer src="../js/app.js"></script>
+</body>
+
+</html>
