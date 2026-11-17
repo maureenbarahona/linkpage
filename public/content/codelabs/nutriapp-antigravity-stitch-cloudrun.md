@@ -38,7 +38,7 @@ Construirás **NutriApp**, una aplicación web de evaluación nutricional clíni
 * **Duración total:** 44 minutos.
 * **Cuenta de Google** con acceso a [Google Stitch](https://stitch.withgoogle.com).
 * **Antigravity IDE** instalado en tu equipo local junto con su CLI (`agy`).
-* **Node.js 20 LTS** (o superior) y **npm** instalados localmente.
+* **Node.js 22 LTS** (o superior) y **npm** instalados localmente.
 * **Cuenta de Google Cloud Platform (GCP)** con facturación activa y **Google Cloud CLI (`gcloud`)** instalada.
 
 Positive : **Tip de tiempo:** Para completar el taller en menos de 50 minutos, mantén abiertas en tu navegador las pestañas de Google Stitch y Google Cloud Console antes de iniciar la Sección 2.
@@ -478,7 +478,7 @@ EOF
 
 ```bash
 cat << 'EOF' > Dockerfile
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 WORKDIR /app
 
 COPY package*.json ./
