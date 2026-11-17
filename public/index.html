@@ -305,7 +305,7 @@
 
                         <span class="btn-background"></span>
                       </button>
-                      <a href="./codelabs/index.html#orquestando-la-salud-con-antigravity" data-codelabs-featured class="intro--codelab-btn">
+                      <a href="./codelabs/index.html#nutriapp-antigravity-stitch-cloudrun" data-codelabs-featured class="intro--codelab-btn">
                         <span id="home-codelab-cta">Iniciar Codelab</span>
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 118" aria-hidden="true">
                           <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
@@ -317,8 +317,8 @@
                     </div>
                     <div class="intro--codelab-trail" aria-label="Codelab interactivo destacado">
                       <span class="intro--codelab-dot" aria-hidden="true"></span>
-                      <a href="./codelabs/index.html#orquestando-la-salud-con-antigravity" data-codelabs-featured class="intro--codelab-featured">
-                        Orquestando la salud con Antigravity
+                      <a href="./codelabs/index.html#nutriapp-antigravity-stitch-cloudrun" data-codelabs-featured class="intro--codelab-featured">
+                        NutriApp: Antigravity, Stitch y Cloud Run
                       </a>
                       <span class="intro--codelab-sep" aria-hidden="true">·</span>
                       <a href="./codelabs/index.html" data-codelabs-catalog class="intro--codelab-catalog">
@@ -644,8 +644,8 @@
       if (isHttpRoot) {
         var catalogPath = isLocal ? "/codelabs/" : "/codelabs";
         var featuredPath = isLocal
-          ? "/codelabs/orquestando-la-salud-con-antigravity/"
-          : "/codelabs/orquestando-la-salud-con-antigravity";
+          ? "/codelabs/nutriapp-antigravity-stitch-cloudrun/"
+          : "/codelabs/nutriapp-antigravity-stitch-cloudrun";
 
         document.querySelectorAll("[data-codelabs-catalog]").forEach(function (el) {
           el.setAttribute("href", catalogPath);
@@ -659,13 +659,13 @@
         var raw = window.localStorage.getItem("maudev_codelabs_progress_v1");
         if (!raw) return;
         var data = JSON.parse(raw);
-        var entry = data && data["orquestando-la-salud-con-antigravity"];
+        var entry = data && data["nutriapp-antigravity-stitch-cloudrun"];
         var ctaEl = document.getElementById("home-codelab-cta");
         if (!entry || !ctaEl) return;
         if (entry.isFinished) {
           ctaEl.textContent = "Taller completado ✓";
         } else if (typeof entry.currentStep === "number" && (entry.currentStep > 0 || (entry.completedSteps && entry.completedSteps.length > 0))) {
-          ctaEl.textContent = "Continuar (Paso " + (entry.currentStep + 1) + "/8)";
+          ctaEl.textContent = "Continuar (Paso " + (entry.currentStep + 1) + "/7)";
         }
       } catch (e) {}
     })();

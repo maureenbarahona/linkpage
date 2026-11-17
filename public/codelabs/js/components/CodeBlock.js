@@ -45,7 +45,7 @@
 
     if (isDiagram) {
       return escapeHtml(code).replace(
-        /(\+[-+]+\+|[-=]{2,}&gt;|&lt;[-=]{2,}|[├└│─]+|\b(?:Google Stitch|Antigravity IDE|GitHub|Google Cloud Build|Artifact Registry|Google Cloud Run|Stitch MCP|Developer Plugin)\b)/g,
+        /(\+[-+]+\+|[-=]{2,}&gt;|&lt;[-=]{2,}|[├└│─]+|\b(?:Google Stitch|Antigravity IDE|GitHub|Google Cloud Build|Cloud Build|Artifact Registry|Google Cloud Run|Stitch MCP|Developer Plugin|UI NutriApp|Docker)\b)/g,
         (match) => {
           if (/^[A-Z]/.test(match)) {
             return `<span class="tok-entity">${match}</span>`;

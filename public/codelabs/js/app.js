@@ -40,9 +40,9 @@
 
   /**
    * Extracts active codelab slug across all routing modes:
-   *  - Query string: `?id=orquestando-la-salud-con-antigravity`
-   *  - Hash (`file://` or subfolder static server): `#orquestando-la-salud-con-antigravity`
-   *  - Clean path (`maureenbarahona.foo` / static subfolder): `/codelabs/orquestando-la-salud-con-antigravity`
+   *  - Query string: `?id=nutriapp-antigravity-stitch-cloudrun`
+   *  - Hash (`file://` or subfolder static server): `#nutriapp-antigravity-stitch-cloudrun`
+   *  - Clean path (`maureenbarahona.foo` / static subfolder): `/codelabs/nutriapp-antigravity-stitch-cloudrun`
    * @returns {string | null}
    */
   function resolveRouteSlug() {
@@ -147,7 +147,7 @@
       await renderCurrentRoute();
     } else {
       // On `file://` or subfolder mounts (e.g. `/public/codelabs/`):
-      // If currently inside a subfolder like `/codelabs/orquestando-.../index.html` and going to catalog, navigate to catalog `index.html`.
+      // If currently inside a subfolder like `/codelabs/nutriapp-.../index.html` and going to catalog, navigate to catalog `index.html`.
       const onSubfolderPage = /\/codelabs\/[^/]+\/index\.html$/i.test(window.location.pathname);
       if (!slug && onSubfolderPage) {
         window.location.href = ns.urls.getCatalogHref();
