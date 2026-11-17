@@ -67,8 +67,11 @@
 
     if (!markdownText) {
       const fallback = /** @type {any} */ (window).__MAUDEV_CODELABS_FALLBACK__;
-      if (fallback && fallback.files && typeof fallback.files[cleanSlug] === 'string') {
-        markdownText = fallback.files[cleanSlug];
+      const fallbackEntry = fallback && fallback.files ? fallback.files[cleanSlug] : null;
+      if (typeof fallbackEntry === 'string') {
+        markdownText = fallbackEntry;
+      } else if (fallbackEntry && typeof fallbackEntry.value === 'string') {
+        markdownText = fallbackEntry.value;
       }
     }
 
