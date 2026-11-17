@@ -53,7 +53,7 @@
       }
     }
     </script>
-  <style id="style">
+  <style id="critical-css">
     /* global */
     body {
       margin: 0;
@@ -72,6 +72,8 @@
 
     .stars {
       z-index: 10;
+      pointer-events: none;
+      will-change: transform;
       animation: animStar 1s linear infinite;
     }
 
@@ -119,11 +121,17 @@
 
     @keyframes animStar {
       from {
-        transform: translateY(0);
+        transform: translate3d(0, 0, 0);
       }
 
       to {
-        transform: translateY(-100vh);
+        transform: translate3d(0, -100vh, 0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .stars {
+        animation: none;
       }
     }
 
@@ -170,7 +178,7 @@
     .section-1 a:hover {
       color: #fff;
       cursor: pointer;
-      transition: 0.3s;
+      transition: opacity 0.3s ease;
     }
 
     .white:hover {
@@ -190,14 +198,12 @@
       }
     }
   </style>
+  <style id="style"></style>
 
   <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
     integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
     crossorigin="anonymous"></script>
-  <link rel="preload" href="./styles/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript>
-    <link rel="stylesheet" href="./styles/css/main.css" />
-  </noscript>
+  <link rel="stylesheet" href="./styles/css/main.css" />
   <!-- Google Tag Manager -->
   <script>
     (function (w, d, s, l, i) {
@@ -293,30 +299,31 @@
                 <div class="intro">
                   <div class="intro--banner">
                     <h1>Maureen<br />Barahona</h1>
-                    <button class="cta">
-                      consultation
+                    <div class="intro--cta-row">
+                      <button class="cta">
+                        consultation
 
-                      <span class="btn-background"></span>
-                    </button>
-                    <div class="codelab-spotlight" aria-label="Codelab interactivo destacado">
-                      <div class="codelab-spotlight--eyebrow">
-                        <span class="codelab-spotlight--pulse" aria-hidden="true"></span>
-                        <span>CODELAB INTERACTIVO · CLOUD &amp; AI · 77 MIN</span>
-                      </div>
-                      <a href="./codelabs/index.html#orquestando-la-salud-con-antigravity" data-codelabs-featured class="codelab-spotlight--title">
+                        <span class="btn-background"></span>
+                      </button>
+                      <a href="./codelabs/index.html#orquestando-la-salud-con-antigravity" data-codelabs-featured class="intro--codelab-btn">
+                        <span id="home-codelab-cta">Iniciar Codelab</span>
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 118" aria-hidden="true">
+                          <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
+                            <path d="M870,1167c-34-17-55-57-46-90c3-15,81-100,194-211l187-185l-565-1c-431,0-571-3-590-13c-55-28-64-94-18-137c21-20,33-20,597-20h575l-192-193C800,103,794,94,849,39c20-20,39-29,61-29c28,0,63,30,298,262c147,144,272,271,279,282c30,51,23,60-219,304C947,1180,926,1196,870,1167z" />
+                          </g>
+                        </svg>
+                        <span class="btn-background"></span>
+                      </a>
+                    </div>
+                    <div class="intro--codelab-trail" aria-label="Codelab interactivo destacado">
+                      <span class="intro--codelab-dot" aria-hidden="true"></span>
+                      <a href="./codelabs/index.html#orquestando-la-salud-con-antigravity" data-codelabs-featured class="intro--codelab-featured">
                         Orquestando la salud con Antigravity
                       </a>
-                      <p class="codelab-spotlight--desc">
-                        De Google Stitch a producción en Cloud Run con Antigravity IDE y GitHub.
-                      </p>
-                      <div class="codelab-spotlight--actions">
-                        <a href="./codelabs/index.html#orquestando-la-salud-con-antigravity" data-codelabs-featured class="codelab-spotlight--cta" id="home-codelab-cta">
-                          Iniciar Codelab →
-                        </a>
-                        <a href="./codelabs/index.html" data-codelabs-catalog class="codelab-spotlight--all">
-                          Todos los talleres
-                        </a>
-                      </div>
+                      <span class="intro--codelab-sep" aria-hidden="true">·</span>
+                      <a href="./codelabs/index.html" data-codelabs-catalog class="intro--codelab-catalog">
+                        Todos los talleres
+                      </a>
                     </div>
                     <img src="./img/introduction-visual.png" alt="Welcome" />
                   </div>
@@ -658,7 +665,7 @@
         if (entry.isFinished) {
           ctaEl.textContent = "Taller completado ✓";
         } else if (typeof entry.currentStep === "number" && (entry.currentStep > 0 || (entry.completedSteps && entry.completedSteps.length > 0))) {
-          ctaEl.textContent = "Continuar (Paso " + (entry.currentStep + 1) + "/8) →";
+          ctaEl.textContent = "Continuar (Paso " + (entry.currentStep + 1) + "/8)";
         }
       } catch (e) {}
     })();
