@@ -147,10 +147,14 @@
       await renderCurrentRoute();
     } else {
       // On `file://` or subfolder mounts (e.g. `/public/codelabs/`):
-      // If currently inside a subfolder like `/codelabs/nutriapp-.../index.html` and going to catalog, navigate to catalog `index.html`.
-      const onSubfolderPage = /\/codelabs\/[^/]+\/index\.html$/i.test(window.location.pathname);
-      if (!slug && onSubfolderPage) {
-        window.location.href = ns.urls.getCatalogHref();
+      // If currently inside a codelab subfolder like `/codelabs/nutriapp-.../` or `/codelabs/nutriapp-.../index.html`,
+      // navigate cleanly to the target catalog or codelab entry.
+      const cleanPath = window.location.pathname
+        .replace(/\/index\.html$/i, '')
+        .replace(/\/+$/, '');
+      const onSubfolderPage = /\/codelabs\/[^/]+$/i.test(cleanPath);
+      if (onSubfolderPage) {
+        window.location.href = slug ? ns.urls.getCodelabHref(slug) : ns.urls.getCatalogHref();
         return;
       }
 

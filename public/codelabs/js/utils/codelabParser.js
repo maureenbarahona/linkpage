@@ -206,7 +206,7 @@
       type: /** @type {'list'} */ ('list'),
       ordered: rootOrdered,
       start: rootStart,
-      items: /** @type {Array<{ text: string, children: any[] }>} */ ([]),
+      items: /** @type {Array<{ text: string, number: number | null, children: any[] }>} */ ([]),
     };
 
     const stack = [{ indent: rootIndent, list: rootList }];
@@ -217,6 +217,7 @@
         const indent = match[1].length;
         const isOrdered = Boolean(match[3]);
         const startNum = match[3] ? parseInt(match[3], 10) : 1;
+        const itemNumber = isOrdered ? startNum : null;
         const itemText = match[4].trim();
 
         while (stack.length > 1 && indent < stack[stack.length - 1].indent) {
@@ -230,12 +231,12 @@
             type: /** @type {'list'} */ ('list'),
             ordered: isOrdered,
             start: startNum,
-            items: [{ text: itemText, children: /** @type {any[]} */ ([]) }],
+            items: [{ text: itemText, number: itemNumber, children: /** @type {any[]} */ ([]) }],
           };
           parentItem.children.push(childList);
           stack.push({ indent, list: childList });
         } else {
-          top.list.items.push({ text: itemText, children: [] });
+          top.list.items.push({ text: itemText, number: itemNumber, children: [] });
         }
       } else if (rawLine.trim()) {
         const top = stack[stack.length - 1];

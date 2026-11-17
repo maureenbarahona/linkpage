@@ -17,6 +17,9 @@
     listBlock.items.forEach((/** @type {any} */ item) => {
       const li = document.createElement('li');
       li.className = 'cl-list__item';
+      if (listBlock.ordered && typeof item.number === 'number') {
+        li.value = item.number;
+      }
 
       const span = document.createElement('div');
       span.className = 'cl-list__text';
@@ -259,6 +262,16 @@
       </button>
     `;
 
+    const websiteBaseUrl = 'https://maureenbarahona.foo';
+    const shareTargetUrl = `${websiteBaseUrl}/codelabs/${encodeURIComponent(metadata.id)}`;
+    const defaultHashtags = ['GoogleCloud', 'CloudRun', 'Antigravity', 'AI', 'MauDev'];
+    const defaultSharePost =
+      `🎉 ¡Acabo de finalizar con éxito el codelab interactivo "${metadata.title}" de ${metadata.authors}! 🚀\n\n` +
+      `Completé los ${steps.length} pasos prácticos (${formatMinutesLabel(metadata.totalDurationMinutes)}) construyendo y desplegando de extremo a extremo. 💻☁️\n\n` +
+      `Te invito a realizar este taller paso a paso aquí 👇\n` +
+      `${shareTargetUrl}\n\n` +
+      defaultHashtags.map((tag) => `#${tag}`).join(' ');
+
     const completionModalEl = document.createElement('section');
     completionModalEl.className = 'cl-completion-banner';
     completionModalEl.hidden = true;
@@ -271,7 +284,7 @@
           Completaste los <strong>${steps.length} pasos</strong> (${formatMinutesLabel(metadata.totalDurationMinutes)} de práctica guiada). Tu progreso quedó guardado en este navegador.
         </p>
         <div class="cl-completion-banner__actions">
-          <button type="button" class="cl-btn cl-btn--primary" data-share-codelab>
+          <button type="button" class="cl-btn cl-btn--primary" data-share-codelab aria-expanded="false">
             Compartir logro 🔗
           </button>
           <button type="button" class="cl-btn cl-btn--secondary" data-restart-codelab>
@@ -281,6 +294,63 @@
             Ver todos los Codelabs
           </a>
         </div>
+
+        <div class="cl-share-composer" data-share-panel hidden>
+          <div class="cl-share-composer__header">
+            <span class="cl-share-composer__label">Tu publicación lista para compartir (puedes personalizarla):</span>
+            <button type="button" class="cl-share-composer__copy-btn" data-copy-post>
+              Copiar post 📋
+            </button>
+          </div>
+          <textarea
+            class="cl-share-composer__textarea"
+            rows="6"
+            aria-label="Mensaje para compartir tu logro en redes sociales"
+            data-share-textarea
+          >${escapeHtml(defaultSharePost)}</textarea>
+          <div class="cl-share-composer__networks">
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cl-social-share-btn cl-social-share-btn--linkedin"
+              data-share-network="linkedin"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+              </svg>
+              <span>Compartir en LinkedIn</span>
+            </a>
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cl-social-share-btn cl-social-share-btn--facebook"
+              data-share-network="facebook"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
+              </svg>
+              <span>Compartir en Facebook</span>
+            </a>
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cl-social-share-btn cl-social-share-btn--x"
+              data-share-network="x"
+            >
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+              <span>Publicar en X</span>
+            </a>
+          </div>
+          <p class="cl-share-composer__dest">
+            Enlace destino incluido: <a href="${escapeHtml(shareTargetUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(shareTargetUrl)}</a>
+          </p>
+        </div>
+
         <p class="cl-completion-banner__feedback" data-share-feedback hidden></p>
       </div>
     `;
@@ -315,6 +385,13 @@
     const stepCounterEl = navBarBottom.querySelector('[data-step-counter]');
 
     const shareBtn = completionModalEl.querySelector('[data-share-codelab]');
+    const sharePanelEl = /** @type {HTMLElement | null} */ (
+      completionModalEl.querySelector('[data-share-panel]')
+    );
+    const shareTextareaEl = /** @type {HTMLTextAreaElement | null} */ (
+      completionModalEl.querySelector('[data-share-textarea]')
+    );
+    const copyPostBtn = completionModalEl.querySelector('[data-copy-post]');
     const restartBtn = completionModalEl.querySelector('[data-restart-codelab]');
     const finishBackLink = completionModalEl.querySelector('[data-finish-back]');
     const shareFeedbackEl = /** @type {HTMLElement | null} */ (
@@ -382,35 +459,96 @@
       });
     }
 
-    if (shareBtn) {
-      shareBtn.addEventListener('click', async () => {
-        const canonicalShareUrl = ns.urls.isFile
-          ? `https://maureenbarahona.foo/codelabs/${encodeURIComponent(metadata.id)}`
-          : window.location.href;
-        const shareTitle = `${metadata.title} · Codelab por ${metadata.authors}`;
-        const shareText = `Acabo de completar el codelab interactivo "${metadata.title}" en maureenbarahona.foo 🚀`;
+    /**
+     * Shows a temporary status toast below the share composer.
+     * @param {string} msg
+     */
+    function showShareFeedback(msg) {
+      if (!shareFeedbackEl) return;
+      shareFeedbackEl.hidden = false;
+      shareFeedbackEl.textContent = msg;
+    }
 
-        if (!ns.urls.isFile && navigator.share) {
-          try {
-            await navigator.share({ title: shareTitle, text: shareText, url: canonicalShareUrl });
-            return;
-          } catch {
-            // Fall back to clipboard copy
-          }
-        }
+    /**
+     * Recomputes dynamic share intent URLs for LinkedIn, Facebook, and X from the textarea content.
+     */
+    function syncSocialShareLinks() {
+      const rawPost = shareTextareaEl ? shareTextareaEl.value.trim() : defaultSharePost;
+      const postWithUrl = rawPost.includes(shareTargetUrl)
+        ? rawPost
+        : `${rawPost}\n\n${shareTargetUrl}`;
 
-        const ok = await ns.CodeBlock.copyTextToClipboard(canonicalShareUrl);
-        if (shareFeedbackEl) {
-          shareFeedbackEl.hidden = false;
-          shareFeedbackEl.textContent = ok
-            ? `✓ ¡Enlace copiado: ${canonicalShareUrl}!`
-            : canonicalShareUrl;
-          window.setTimeout(() => {
-            shareFeedbackEl.hidden = true;
-          }, 3500);
+      // For X (Twitter), pass concise joyful text + `url=` parameter so X renders the clickable website card cleanly
+      const xShortText =
+        `🎉 ¡Acabo de finalizar el codelab "${metadata.title}" de ${metadata.authors}! 🚀 ` +
+        `Te invito a realizarlo paso a paso 👇 #GoogleCloud #CloudRun #Antigravity #MauDev`;
+      const xCustomText = rawPost.replace(shareTargetUrl, '').trim() || xShortText;
+      const xIntentText = xCustomText.length <= 240 ? xCustomText : xShortText;
+
+      const linkedinHref = `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(postWithUrl)}`;
+      const facebookHref = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareTargetUrl)}&quote=${encodeURIComponent(rawPost)}`;
+      const xHref = `https://x.com/intent/tweet?text=${encodeURIComponent(xIntentText)}&url=${encodeURIComponent(shareTargetUrl)}`;
+
+      const lnBtn = completionModalEl.querySelector('[data-share-network="linkedin"]');
+      const fbBtn = completionModalEl.querySelector('[data-share-network="facebook"]');
+      const twBtn = completionModalEl.querySelector('[data-share-network="x"]');
+
+      if (lnBtn) lnBtn.setAttribute('href', linkedinHref);
+      if (fbBtn) fbBtn.setAttribute('href', facebookHref);
+      if (twBtn) twBtn.setAttribute('href', xHref);
+    }
+
+    syncSocialShareLinks();
+
+    if (shareTextareaEl) {
+      shareTextareaEl.addEventListener('input', syncSocialShareLinks);
+    }
+
+    if (shareBtn && sharePanelEl) {
+      shareBtn.addEventListener('click', () => {
+        const nextOpen = sharePanelEl.hidden;
+        sharePanelEl.hidden = !nextOpen;
+        shareBtn.setAttribute('aria-expanded', String(nextOpen));
+        if (nextOpen) {
+          syncSocialShareLinks();
+          sharePanelEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
       });
     }
+
+    if (copyPostBtn) {
+      copyPostBtn.addEventListener('click', async () => {
+        const currentPost = shareTextareaEl ? shareTextareaEl.value.trim() : defaultSharePost;
+        const ok = await ns.CodeBlock.copyTextToClipboard(currentPost);
+        if (ok) {
+          copyPostBtn.textContent = '¡Post copiado! ✓';
+          showShareFeedback('✓ ¡Publicación y enlace copiados al portapapeles!');
+          window.setTimeout(() => {
+            copyPostBtn.textContent = 'Copiar post 📋';
+          }, 2500);
+        }
+      });
+    }
+
+    completionModalEl.querySelectorAll('[data-share-network]').forEach((netLink) => {
+      netLink.addEventListener('click', async () => {
+        syncSocialShareLinks();
+        const network = netLink.getAttribute('data-share-network');
+        const currentPost = shareTextareaEl ? shareTextareaEl.value.trim() : defaultSharePost;
+        await ns.CodeBlock.copyTextToClipboard(currentPost);
+        if (network === 'facebook') {
+          showShareFeedback(
+            '✓ Se abrió Facebook con el enlace a maureenbarahona.foo y copiamos tu mensaje listo para pegar (Ctrl+V).'
+          );
+        } else if (network === 'linkedin') {
+          showShareFeedback(
+            '✓ Abriendo LinkedIn con tu publicación prellenada (también quedó copiada en tu portapapeles).'
+          );
+        } else {
+          showShareFeedback('✓ Abriendo X con tu publicación e invitación a maureenbarahona.foo.');
+        }
+      });
+    });
 
     if (restartBtn) {
       restartBtn.addEventListener('click', () => {
