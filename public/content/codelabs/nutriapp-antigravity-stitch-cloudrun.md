@@ -27,9 +27,9 @@ Construirás **NutriApp**, una aplicación web de evaluación nutricional clíni
 ### Arquitectura y flujo de trabajo
 
 ```text
-+-----------------+     Stitch MCP     +-------------------+     Docker + gcloud     +-------------------+
++-----------------+     Stitch MCP     +-------------------+     Docker + GitHub     +-------------------+
 |  Google Stitch  | -----------------> |  Antigravity IDE  | ----------------------> | Google Cloud Run  |
-| (UI NutriApp)   |  (API Key + Specs) | (Agente + Código) |   (Cloud Build / CLI)   | (HTTPS en vivo)   |
+| (UI NutriApp)   |  (API Key + Specs) | (Agente + Código) |   (Cloud Build / CD)    | (HTTPS en vivo)   |
 +-----------------+                    +-------------------+                         +-------------------+
 ```
 
@@ -38,8 +38,9 @@ Construirás **NutriApp**, una aplicación web de evaluación nutricional clíni
 * **Duración total:** 44 minutos.
 * **Cuenta de Google** con acceso a [Google Stitch](https://stitch.withgoogle.com).
 * **Antigravity IDE** instalado en tu equipo local junto con su CLI (`agy`).
-* **Node.js 22 LTS** (o superior) y **npm** instalados localmente.
-* **Cuenta de Google Cloud Platform (GCP)** con facturación activa y **Google Cloud CLI (`gcloud`)** instalada.
+* **Node.js 22 LTS** (o superior), **npm** y **Git** instalados localmente.
+* **Cuenta de GitHub** para publicar el repositorio y conectarlo con Cloud Run.
+* **Cuenta de Google Cloud Platform (GCP)** con un proyecto y facturación activa (no necesitas instalar `gcloud` CLI).
 
 Positive : **Tip de tiempo:** Para completar el taller en menos de 50 minutos, mantén abiertas en tu navegador las pestañas de Google Stitch y Google Cloud Console antes de iniciar la Sección 2.
 
@@ -239,9 +240,9 @@ Positive : **Calidad del diseño:** Verifica con las herramientas de desarrollad
 ## 6. Prepara el contenedor y despliega NutriApp en Google Cloud Run
 Duration: 0:09:00
 
-En lugar de escribir archivos de configuración desde cero o memorizar parámetros complejos de terminal, vamos a pedirle al agente de **Antigravity** que prepare la estructura del contenedor siguiendo las mejores prácticas de producción y nos guíe en el despliegue hacia **Google Cloud Run**.
+En lugar de escribir archivos de configuración desde cero o instalar herramientas de línea de comandos adicionales como `gcloud`, le pediremos al agente de **Antigravity** que prepare la estructura del contenedor siguiendo las mejores prácticas de producción, publicaremos el repositorio en **GitHub** y lo conectaremos directamente desde la consola web de **Google Cloud Run**.
 
-### Paso 6.1: Preparar el proyecto con el agente de Antigravity
+### Paso 6.1: Preparar el proyecto y publicarlo en GitHub con Antigravity
 
 Abre el panel **Agent Chat** en Antigravity, pega el siguiente *prompt* y presiona **Enter**:
 
@@ -252,68 +253,66 @@ Actúa como un arquitecto Cloud en Google Cloud y prepara el proyecto NutriApp p
 2. Exclusión de archivos (.dockerignore): Genera un .dockerignore adecuado para evitar copiar dependencias locales, archivos temporales, credenciales o carpetas de configuración del agente (como node_modules, dist, .git, .agents, .env).
 3. Configuración de puerto: Verifica que el contenedor escuche en el puerto 8080 (o en la variable de entorno PORT con respaldo en 8080), requisito indispensable para Cloud Run.
 4. Verificación previa: Revisa que npm run build compile sin errores y que no existan archivos sensibles expuestos antes de desplegar.
-5. **Seguridad:** Verifica que `.agents/mcp_config.json` esté incluido en el `.gitignore` para no subir mi API Key a GitHub.
+5. Seguridad: Verifica que .agents/mcp_config.json y cualquier archivo con credenciales estén incluidos en .gitignore para no subir mi API Key a GitHub.
 
 Cuando termines, realiza un commit y sube los cambios a mi repositorio en GitHub.
 ```
 
-Positive : **Permisos del agente:** Cuando Antigravity solicite confirmación para crear o validar `Dockerfile` y `.dockerignore`, haz clic en **Allow / Submit**.
+Positive : **Permisos del agente:** Cuando Antigravity solicite confirmación para crear o validar `Dockerfile`, `.dockerignore` y el commit de Git, haz clic en **Allow / Submit**.
 
 Al generar el `Dockerfile` u otros archivos de configuración, es posible que **Antigravity** te sugiera instalar extensiones recomendadas para esos formatos (como la extensión **Docker** de `ms-azuretools` mostrada a continuación u otras que aún no tengas instaladas). Puedes hacer clic en **Install** para habilitar el resaltado de sintaxis y autocompletado, o cerrar la notificación (`×`), ya que **Cloud Build** construirá el contenedor directamente en la nube en el siguiente paso:
 
 ![Sugerencia en Antigravity para instalar la extensión recomendada de Docker u otras extensiones](content/codelabs/img/nutriapp/paso-6-1-extensiones.png)
 
-### Paso 6.2: Desplegar NutriApp en Google Cloud Run
+Si tu proyecto local aún no tenía un repositorio remoto configurado en GitHub, abre la vista **Source Control** en la barra lateral de Antigravity y haz clic en **Publish Branch** para crear y publicar la rama `main` directamente en tu cuenta de **GitHub** (autorizando el acceso en el navegador si es tu primera vez):
 
-Una vez que el agente haya generado y validado los archivos de contenedorización, abre la terminal integrada de Antigravity (`Ctrl+\`` o `Ctrl+ñ`) y ejecuta el despliegue directo desde el código fuente (usando Cloud Build y Artifact Registry automáticamente):
+![Publicar la rama main en GitHub desde el panel Source Control de Antigravity](content/codelabs/img/nutriapp/paso-6-1-publish-branch.png)
 
-1. **Inicia sesión en Google Cloud y configura tu proyecto activo** (reemplaza `TU_PROJECT_ID` con el ID real de tu proyecto en GCP):
+### Paso 6.2: Conectar GitHub y desplegar en Google Cloud Run
 
-```bash
-gcloud auth login
-gcloud config set project TU_PROJECT_ID
-```
+1. Ingresa a [Google Cloud Console](https://console.cloud.google.com/) con un proyecto que tenga facturación activa, escribe **`cloud run`** en la barra de búsqueda superior y selecciona **Cloud Run**:
 
-Negative : **Requisito de facturación:** Asegúrate de que `TU_PROJECT_ID` tenga una cuenta de facturación activa vinculada en [Google Cloud Console > Billing](https://console.cloud.google.com/billing); de lo contrario, Cloud Build y Cloud Run rechazarán el despliegue.
+![Subpaso 1: Buscar y abrir Cloud Run desde Google Cloud Console](content/codelabs/img/nutriapp/paso-6-2-1.png)
 
-2. **Ejecuta el despliegue del servicio `nutriapp` en Cloud Run** (este comando de una sola línea funciona tanto en **PowerShell** como en **Bash**):
+2. En la pantalla principal (**Implementa un servicio web**), haz clic en la tarjeta **Implementa un contenedor**:
 
-```bash
-gcloud run deploy nutriapp --source . --platform managed --region us-central1 --port 8080 --allow-unauthenticated
-```
+![Subpaso 2: Seleccionar Implementa un contenedor en Cloud Run](content/codelabs/img/nutriapp/paso-6-2-2.png)
 
-Si es tu primer despliegue en el proyecto o en la región `us-central1` y `gcloud` te solicita habilitar las APIs (**Cloud Run**, **Cloud Build**, **Artifact Registry**) o crear el repositorio `cloud-run-source-deploy`, escribe **`Y`** y presiona **Enter**.
+3. En **Crear servicio**, marca la opción central **Implementar continuamente a partir de un repositorio (de origen o de función)** (GitHub) y haz clic en el botón **Configurar con Cloud Build** (o **Configurar con Developer Connect**):
 
-### Paso 6.3: Verificar tu aplicación en vivo
+![Subpaso 3: Elegir Implementar continuamente a partir de un repositorio en Crear servicio](content/codelabs/img/nutriapp/paso-6-2-3.png)
 
-1. Espera entre 1 y 3 minutos mientras Cloud Build construye la imagen con el `Dockerfile` generado por Antigravity y Cloud Run publica la revisión.
-2. Al finalizar, la terminal mostrará la confirmación junto con tu **Service URL** pública:
+4. En el panel **Configurar con Developer Connect**, dentro de **1. Repositorio de código fuente**, vincula tu cuenta de **GitHub** (si aún no estaba conectada), selecciona tu repositorio de **NutriApp** en el menú desplegable y haz clic en **Siguiente**:
 
-```text
-Done.
-Service [nutriapp] revision [nutriapp-00001-xxx] has been deployed and is serving 100 percent of traffic.
-Service URL: https://nutriapp-xxxxxxxxxx-uc.a.run.app
-```
+![Subpaso 4: Seleccionar el repositorio de NutriApp en Developer Connect y avanzar](content/codelabs/img/nutriapp/paso-6-2-4.png)
 
-3. Haz clic en la **Service URL** (o ábrela en tu navegador), ingresa los datos de prueba de un paciente (como los validados en la Sección 5) y comprueba que la interfaz diseñada en **Google Stitch** y los cálculos antropométricos, macros y micronutrientes funcionen correctamente sobre HTTPS.
+5. En **2. Configuración de compilación**, confirma que la **Rama** sea `main`, elige **Dockerfile** (con ubicación `/Dockerfile`) como **Tipo de compilación** y haz clic en **Guardar**:
+
+![Subpaso 5: Configurar la rama main y Dockerfile como tipo de compilación](content/codelabs/img/nutriapp/paso-6-2-5.png)
+
+6. Completa la sección **Configurar** del servicio guiándote por los indicadores de la imagen:
+   * **(1) Nombre de Servicio:** escribe un identificador en minúsculas, por ejemplo `nutriapp-demo`.
+   * **(2) Región:** selecciona una región disponible, como `us-west1 (Oregón)` o `us-central1 (Iowa)`.
+   * **(3) URL personalizadas (opcional):** en regiones compatibles (como `us-west1`) puedes definir un alias legible bajo `.cloud.run` (por ejemplo, `nutri-mau-demo.cloud.run`), además de la **URL del extremo** generada por defecto.
+   * **(4) Autenticación:** selecciona **Permitir acceso público** para que la aplicación sea accesible desde cualquier navegador sin requerir inicio de sesión en IAM.
+
+![Subpaso 6: Configurar nombre del servicio (1), región (2), URL personalizada opcional (3) y acceso público (4)](content/codelabs/img/nutriapp/paso-6-2-6.png)
+
+7. Desplázate hasta el final del formulario, haz clic en **Crear** y espera entre 1 y 3 minutos mientras **Cloud Build** construye la imagen con el `Dockerfile` creado por Antigravity y publica la revisión. Cuando finalice, abre la **URL del extremo** (o tu URL `.cloud.run`) y comprueba en vivo los cálculos antropométricos, macros y micronutrientes de **NutriApp** sobre HTTPS.
+
+Positive : **Despliegue continuo listo:** Al quedar vinculado con GitHub, cada nuevo cambio que le pidas a Antigravity y subas a la rama `main` disparará automáticamente una nueva compilación y actualización en Cloud Run.
 
 ---
 
 ## 7. Limpieza de recursos y próximos pasos
 Duration: 0:02:00
 
-Si no necesitas mantener el servicio publicado tras concluir las pruebas, elimina los recursos para evitar costos de almacenamiento de imágenes en Artifact Registry.
+Si no necesitas mantener el servicio publicado tras concluir las pruebas, puedes eliminar los recursos directamente desde la consola web para evitar cargos de almacenamiento de imágenes en Artifact Registry.
 
-### Paso 7.1: Eliminar el servicio de Cloud Run y el repositorio de imágenes
+### Paso 7.1: Eliminar el servicio y las imágenes desde Google Cloud Console
 
-Ejecuta los siguientes comandos en tu terminal para eliminar el servicio `nutriapp` y el repositorio `cloud-run-source-deploy` creado durante el despliegue desde código fuente:
-
-```bash
-gcloud run services delete nutriapp --region us-central1 --quiet
-gcloud artifacts repositories delete cloud-run-source-deploy --location=us-central1 --quiet
-```
-
-Deberías ver `Deleted service [nutriapp].` y la confirmación de borrado del repositorio en Artifact Registry.
+1. En [Google Cloud Console > Cloud Run](https://console.cloud.google.com/run), marca la casilla de tu servicio (`nutriapp-demo`), haz clic en **Eliminar** en la barra superior y confirma la acción.
+2. Abre [Artifact Registry](https://console.cloud.google.com/artifacts), ingresa al repositorio `cloud-run-source-deploy` creado automáticamente durante la compilación y elimina el repositorio (o la carpeta de `nutriapp-demo`) para liberar el espacio de almacenamiento.
 
 ### Resumen y próximos pasos
 
@@ -322,6 +321,6 @@ En menos de 50 minutos lograste:
 * Diseñar **NutriApp** en **Google Stitch** con una estética clínica limpia.
 * Conectar Stitch con **Antigravity IDE** mediante el servidor remoto **Stitch MCP**.
 * Generar lógica antropométrica y nutricional real (IMC, ICA, TMB, GET, macros y micronutrientes) en React + TypeScript.
-* Contenerizar la aplicación con buenas prácticas asistido por el agente de Antigravity y desplegarla en producción en **Google Cloud Run**.
+* Contenerizar la aplicación asistido por el agente de Antigravity, publicarla en **GitHub** y activar despliegue continuo en **Google Cloud Run** sin depender de `gcloud` CLI.
 
-Como siguiente paso, puedes versionar este repositorio en **GitHub**, habilitar **Continuous Deployment** en Cloud Run para desplegar en cada `git push`, o conectar un backend seguro en Cloud Run para generar planes semanales de alimentación adaptados a las alergias del paciente.
+Como siguiente paso, prueba realizar una mejora visual o funcional en Antigravity y hacer *push* a `main` para ver cómo **Cloud Run** despliega la nueva revisión automáticamente, o conecta un backend seguro con **Gemini API** en Cloud Run para sugerir menús semanales adaptados a las alergias del paciente.
