@@ -140,25 +140,21 @@ New-Item -ItemType Directory -Force -Path $configDir | Out-Null
 '@ | Set-Content -Path "$configDir\mcp_config.json" -Encoding UTF8
 ```
 
-### Paso 3.3: Instalar las habilidades de Stitch para el agente (Recomendado)
+### Paso 3.3: Probar la conexión MCP
 
-En la terminal integrada de Antigravity (`Ctrl+\``), instala las habilidades oficiales `stitch-skills` en el ámbito del proyecto para mejorar la traducción fiel de tokens y componentes:
-
-```bash
-npx skills add google-labs-code/stitch-skills --scope project
-```
-
-Deberías ver el mensaje confirmando que las skills de Stitch quedaron instaladas en el proyecto.
-
-### Paso 3.4: Probar la conexión MCP
-
-Abre el panel **Agent Chat** en Antigravity y escribe:
+1. Abre el panel **Agent Chat** en Antigravity, escribe el siguiente prompt y presiona `Enter`:
 
 ```text
 List my Stitch projects
 ```
 
-Deberías ver al agente consultar el servidor MCP de Stitch y listar el proyecto **NutriApp - Evaluación Nutricional** con su **Project ID**.
+2. Cuando Antigravity muestre el cuadro de confirmación **Allow using this MCP tool?** (`stitch/list_projects`), selecciona **Yes, allow this time** (o *Yes, and always allow in this conversation*) y haz clic en **Submit**:
+
+![Subpaso 1: Autorizar la ejecución de la herramienta MCP stitch/list_projects haciendo clic en Submit](content/codelabs/img/nutriapp/paso-3-3-1.png)
+
+3. Deberías ver al agente consultar el servidor MCP de Stitch y mostrar una tabla con tus proyectos junto con su **Project ID**. Copia el **Project ID** de tu proyecto **NutriApp** (resaltado en la tabla) para utilizarlo en la siguiente sección:
+
+![Subpaso 2: Tabla de proyectos devuelta por Stitch MCP mostrando NutriApp y su Project ID](content/codelabs/img/nutriapp/paso-3-3-2.png)
 
 ---
 
