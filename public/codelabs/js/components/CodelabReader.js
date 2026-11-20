@@ -112,6 +112,42 @@
         hr.className = 'cl-divider';
         return hr;
       }
+      case 'image': {
+        const { escapeHtml } = ns.parser;
+        const rawSrc = String(block.src || '');
+        const resolvedSrc = /^(https?:\/\/|data:)/i.test(rawSrc)
+          ? rawSrc
+          : ns.urls.getPublicAssetHref(rawSrc.replace(/^(\.\/|\.\.\/|\/)+/, ''));
+
+        const figure = document.createElement('figure');
+        figure.className = 'cl-figure';
+
+        const frame = document.createElement('div');
+        frame.className = 'cl-figure__frame';
+
+        const img = document.createElement('img');
+        img.className = 'cl-figure__img';
+        img.src = resolvedSrc;
+        img.alt = block.alt || '';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.title = 'Haz clic para ampliar o reducir imagen';
+        img.addEventListener('click', () => {
+          figure.classList.toggle('is-expanded');
+        });
+
+        frame.appendChild(img);
+        figure.appendChild(frame);
+
+        if (block.caption) {
+          const caption = document.createElement('figcaption');
+          caption.className = 'cl-figure__caption';
+          caption.innerHTML = renderInlineMarkdown(block.caption);
+          figure.appendChild(caption);
+        }
+
+        return figure;
+      }
       default:
         return document.createElement('div');
     }

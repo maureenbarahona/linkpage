@@ -18,6 +18,9 @@
     bash: 'Terminal · Bash',
     sh: 'Terminal · Shell',
     shell: 'Terminal · Shell',
+    powershell: 'Terminal · PowerShell',
+    pwsh: 'Terminal · PowerShell',
+    ps1: 'PowerShell',
     ts: 'TypeScript',
     typescript: 'TypeScript',
     js: 'JavaScript',
@@ -68,6 +71,9 @@
     } else if (lang === 'bash' || lang === 'sh' || lang === 'shell') {
       tokenRegex =
         /(?<comment>(?:^|\s)#[^\n]*)|(?<string>"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')|(?<variable>\$\{?[A-Za-z_][A-Za-z0-9_]*\}?)|(?<flag>(?:^|\s)--?[A-Za-z0-9_-]+)|(?<keyword>\b(?:gcloud|git|gh|npm|npx|agy|curl|echo|export|mkdir|cd|cat|EOF)\b)/gm;
+    } else if (lang === 'powershell' || lang === 'pwsh' || lang === 'ps1') {
+      tokenRegex =
+        /(?<comment>(?:^|\s)#[^\n]*)|(?<string>@'[\s\S]*?'@|@"[\s\S]*?"@|"(?:`[\s\S]|[^"])*"|'(?:''|[^'])*')|(?<variable>\$(?:env:)?[A-Za-z_][A-Za-z0-9_]*)|(?<flag>(?:^|\s)-[A-Za-z][A-Za-z0-9-]*)|(?<keyword>\b(?:New-Item|Set-Content|Get-Content|Out-Null|Write-Output|Write-Host|Copy-Item|Remove-Item)\b)/gm;
     } else if (lang === 'dockerfile') {
       tokenRegex =
         /(?<comment>^\s*#[^\n]*)|(?<keyword>^\s*(?:FROM|AS|WORKDIR|COPY|RUN|EXPOSE|CMD|ENTRYPOINT|ENV|ARG)\b)|(?<flag>\s--[A-Za-z0-9_-]+(?:=[^\s]+)?)|(?<string>"(?:\\.|[^"\\])*")/gim;
