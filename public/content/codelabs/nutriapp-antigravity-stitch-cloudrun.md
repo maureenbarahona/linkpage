@@ -307,12 +307,26 @@ Positive : **Despliegue continuo listo:** Al quedar vinculado con GitHub, cada n
 ## 7. Limpieza de recursos y próximos pasos
 Duration: 0:02:00
 
-Si no necesitas mantener el servicio publicado tras concluir las pruebas, puedes eliminar los recursos directamente desde la consola web para evitar cargos de almacenamiento de imágenes en Artifact Registry.
+Si no necesitas mantener el servicio publicado tras concluir las pruebas, elimina los recursos para evitar cargos de almacenamiento de imágenes en Artifact Registry. Puedes hacerlo desde la interfaz gráfica de GCP o desde la terminal integrada **Cloud Shell** en el navegador.
 
-### Paso 7.1: Eliminar el servicio y las imágenes desde Google Cloud Console
+### Paso 7.1: Eliminar el servicio de Cloud Run y el repositorio de imágenes
+
+**Opción A: Desde la interfaz web de Google Cloud Console**
 
 1. En [Google Cloud Console > Cloud Run](https://console.cloud.google.com/run), marca la casilla de tu servicio (`nutriapp-demo`), haz clic en **Eliminar** en la barra superior y confirma la acción.
 2. Abre [Artifact Registry](https://console.cloud.google.com/artifacts), ingresa al repositorio `cloud-run-source-deploy` creado automáticamente durante la compilación y elimina el repositorio (o la carpeta de `nutriapp-demo`) para liberar el espacio de almacenamiento.
+
+**Opción B: Desde la línea de comandos en Google Cloud Shell (en GCP)**
+
+1. En la esquina superior derecha de [Google Cloud Console](https://console.cloud.google.com/), haz clic en el ícono **Activar Cloud Shell** (`>_`) para abrir la línea de comandos en GCP (ya incluye `gcloud` preinstalado y autenticado en tu proyecto).
+2. Ejecuta los siguientes comandos reemplazando `nutriapp-demo` y `us-west1` si utilizaste otro nombre de servicio u otra región en el Paso 6.2:
+
+```bash
+gcloud run services delete nutriapp-demo --region us-west1 --quiet
+gcloud artifacts repositories delete cloud-run-source-deploy --location=us-west1 --quiet
+```
+
+Deberías ver `Deleted service [nutriapp-demo].` y la confirmación de borrado del repositorio en Artifact Registry.
 
 ### Resumen y próximos pasos
 
