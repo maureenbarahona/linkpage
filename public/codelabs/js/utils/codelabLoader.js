@@ -52,7 +52,7 @@
         const mdUrl = ns.urls.getPublicAssetHref(
           `content/codelabs/${encodeURIComponent(cleanSlug)}.md`
         );
-        const response = await fetch(mdUrl);
+        const response = await fetch(mdUrl, { cache: 'no-cache' });
         if (response.ok) {
           const contentType = response.headers.get('content-type') || '';
           const fetched = await response.text();
@@ -103,7 +103,7 @@
     if (!ns.urls.isFile) {
       try {
         const manifestUrl = ns.urls.getPublicAssetHref('content/codelabs/manifest.json');
-        const response = await fetch(manifestUrl);
+        const response = await fetch(manifestUrl, { cache: 'no-cache' });
         if (response.ok) {
           const manifest = await response.json();
           rawList = Array.isArray(manifest)

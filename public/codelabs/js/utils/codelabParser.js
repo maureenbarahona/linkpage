@@ -386,7 +386,7 @@
       }
 
       // 5b. Standalone Markdown Image: ![alt](src "optional caption")
-      const imageMatch = trimmed.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]+)")?\)$/);
+      const imageMatch = trimmed.match(/^!\[(.*?)\]\(([^)\s]+)(?:\s+"([^"]+)")?\)$/);
       if (imageMatch) {
         blocks.push({
           type: 'image',

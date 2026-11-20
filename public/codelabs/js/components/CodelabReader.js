@@ -129,7 +129,6 @@
         img.className = 'cl-figure__img';
         img.src = resolvedSrc;
         img.alt = block.alt || '';
-        img.loading = 'lazy';
         img.decoding = 'async';
         img.title = 'Haz clic para ampliar o reducir imagen';
         img.addEventListener('click', () => {
