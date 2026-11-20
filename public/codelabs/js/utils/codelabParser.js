@@ -108,6 +108,20 @@
     // 4. Escape HTML on all non-code prose
     text = escapeHtml(text);
 
+    // 4b. Extract inline Markdown images ![alt](src) safely before links
+    text = text.replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+&quot;([^&]*?)&quot;)?\)/g, (_, alt, rawSrc) => {
+      const src = rawSrc.replace(/&amp;/g, '&');
+      const resolvedSrc =
+        ns.urls && !/^(https?:\/\/|data:)/i.test(src)
+          ? ns.urls.getPublicAssetHref(src.replace(/^(\.\/|\.\.\/|\/)+/, ''))
+          : src;
+      const idx = linkTokens.length;
+      linkTokens.push(
+        `<img src="${escapeHtml(resolvedSrc)}" alt="${alt}" class="cl-inline-img" loading="lazy" decoding="async" />`
+      );
+      return `\u0000LINK_${idx}\u0000`;
+    });
+
     // 5. Extract Markdown links [label](url) safely
     text = text.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, label, rawHref) => {
       const href = rawHref.replace(/&amp;/g, '&');
@@ -371,6 +385,19 @@
         continue;
       }
 
+      // 5b. Standalone Markdown Image: ![alt](src "optional caption")
+      const imageMatch = trimmed.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]+)")?\)$/);
+      if (imageMatch) {
+        blocks.push({
+          type: 'image',
+          alt: imageMatch[1].trim(),
+          src: imageMatch[2].trim(),
+          caption: (imageMatch[3] || imageMatch[1] || '').trim(),
+        });
+        i += 1;
+        continue;
+      }
+
       // 6. GFM Pipe Table
       if (trimmed.includes('|') && i + 1 < lines.length && isTableSeparator(lines[i + 1])) {
         const headers = parseTableRow(trimmed);
@@ -430,7 +457,7 @@
       while (
         i < lines.length &&
         lines[i].trim() &&
-        !/^(#{1,6}\s|`{3,}|~{3,}|-{3,}$|(?:Positive|Negative)\s*:)/i.test(lines[i].trim()) &&
+        !/^(#{1,6}\s|`{3,}|~{3,}|-{3,}$|!\[[^\]]*\]\(|(?:Positive|Negative)\s*:)/i.test(lines[i].trim()) &&
         !/^\s*(\*|-|\+|\d+\.)\s+/.test(lines[i]) &&
         !(lines[i].includes('|') && i + 1 < lines.length && isTableSeparator(lines[i + 1]))
       ) {

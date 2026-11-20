@@ -84,9 +84,7 @@ Asegura alto contraste en todas las etiquetas de unidades (kg, cm, kcal, g, mg, 
 ```
 
 2. Anota tu **Stitch Project ID** desde la URL del navegador: en `https://stitch.withgoogle.com/projects/TU_PROJECT_ID`, copia el identificador alfanumérico final.
-3. Genera tu **Stitch API Key**:
-   * Haz clic en tu **avatar de perfil** (esquina superior derecha) -> **Settings** -> **API Keys**.
-   * Haz clic en **Create Key**, copia la clave generada y guárdala en un lugar seguro de tu equipo.
+3. Mantén abierta tu sesión de Google Stitch para generar tu **Stitch API Key** y configurar la conexión MCP guiada en la siguiente sección.
 
 Negative : **Seguridad:** No pegues ni guardes tu `STITCH_API_KEY` dentro del código fuente del proyecto ni la subas a repositorios públicos. Solo la usará la configuración privada del servidor MCP en Antigravity.
 
@@ -104,31 +102,43 @@ En tu terminal local, crea la carpeta del proyecto y ábrela en Antigravity IDE:
 ```bash
 mkdir -p ~/nutriapp
 cd ~/nutriapp
-agy .
 ```
 
 ### Paso 3.2: Configurar Stitch MCP Server en Antigravity
 
-1. En Antigravity IDE, abre el panel lateral **Customizations** (o haz clic en el menú `...` del panel **Agent** -> **MCP Servers**).
-2. Haz clic en **Manage MCP Servers** -> **Add MCP Server (+)** (o selecciona **View raw config** para editar `mcp_config.json`).
-3. Si usas el catálogo visual, selecciona **Stitch MCP** y pega tu `STITCH_API_KEY`.
-4. Si prefieres la configuración manual en `mcp_config.json`, agrega el siguiente bloque reemplazando `TU_STITCH_API_KEY`:
+Sigue estos subpasos para generar tu llave en Google Stitch y registrarla en Antigravity IDE:
 
-```json
+1. En **Google Stitch**, haz clic en tu **foto de perfil** (esquina superior derecha) y selecciona **Stitch Settings** **(1)**:
+
+![Subpaso 1: Abrir Stitch Settings desde el menú de cuenta en Google Stitch](content/codelabs/img/nutriapp/paso-3-2-1.png)
+
+2. Dentro de la sección **API key**, haz clic en el botón **Create key** para generar una nueva clave de acceso:
+
+![Subpaso 2: Hacer clic en Create key dentro de la sección API key](content/codelabs/img/nutriapp/paso-3-2-2.png)
+
+3. Verifica tu llave recién generada **(1)**, despliega la sección **Setup MCP**, selecciona **Antigravity** en *Client* junto con tu **API Key** **(2)** y copia tu clave desde el bloque **Configuration** **(3)**:
+
+![Subpaso 3: Seleccionar cliente Antigravity en Setup MCP y copiar la API Key](content/codelabs/img/nutriapp/paso-3-2-3.png)
+
+4. Al copiar la llave, abre **PowerShell** en tu equipo y ejecuta el siguiente código (reemplazando `TU_STITCH_API_KEY` por la llave copiada) para crear y guardar automáticamente `$env:USERPROFILE\.gemini\antigravity\mcp_config.json`:
+
+```powershell
+$configDir = "$env:USERPROFILE\.gemini\antigravity"
+New-Item -ItemType Directory -Force -Path $configDir | Out-Null
+
+@'
 {
   "mcpServers": {
     "stitch": {
-      "command": "npx",
-      "args": ["-y", "@_davideast/stitch-mcp", "proxy"],
-      "env": {
-        "STITCH_API_KEY": "TU_STITCH_API_KEY"
+      "serverUrl": "https://stitch.googleapis.com/mcp",
+      "headers": {
+        "X-Goog-Api-Key":  "TU_STITCH_API_KEY"
       }
     }
   }
 }
+'@ | Set-Content -Path "$configDir\mcp_config.json" -Encoding UTF8
 ```
-
-5. Guarda el archivo (`Cmd+S` / `Ctrl+S`) y presiona **Refresh** en el panel de MCP Servers hasta ver el estado conectado en verde.
 
 ### Paso 3.3: Instalar las habilidades de Stitch para el agente (Recomendado)
 
